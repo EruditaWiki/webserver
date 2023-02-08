@@ -94,42 +94,54 @@ $categories = getCategories();
 </head>
 
 <body>
-    <h1 id="heading" class="text-center mt-3">
-        <?php echo $keyword ?> Article
-    </h1>
-    <form method="post" action="edit.php" class="container mt-5" enctype="multipart/form-data">
-        <?php if (isset($cover_image_url) && $isEditMode) { ?>
-            <div class="col-12 text-center">
-                <img id="cover-image" src="<?php echo $cover_image_url; ?>" alt="Cover image"
-                    class="mb-3 border border-warning rounded p-1 col-md-4">
+    <div class="container">
+        <section class="py-5 text-center container">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <img src="./assets/v2_round.png" class="rounded mx-auto d-block" height="100px"><br>
+                    <h1 class="fw-light">
+                        <?php echo $keyword ?> your article
+                    </h1>
+                </div>
             </div>
-        <?php } ?>
-        <div class="form-group">
-            <label for="cover_image_url">Cover Bild</label>
-            <input type="file" name="cover_image_url" id="cover_image_url" accept="image/*" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" value="<?php echo $title; ?>" required class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea name="content" id="content" required class="form-control"><?php echo $content; ?></textarea>
-        </div>
-        <div class="form-group">
-            <label for="category_id">Category</label>
-            <select name="category_id" id="category_id" required class="form-control">
-                <?php
-                foreach ($categories as $category) {
-                    echo '<option value="' . $category['id'] . '" ' . ($category['id'] === $category_id ? 'selected' : '') . '>' . $category['name'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary" <?php if (!isset($_SESSION['user'])): ?>disabled<?php endif; ?>>
-            <?php echo $keyword ?>
-        </button>
-    </form>
+        </section>
+        <form method="post" action="edit.php" class="container" enctype="multipart/form-data">
+            <?php if (isset($cover_image_url) && $isEditMode) { ?>
+                <div class="col-12 text-center">
+                    <img id="cover-image" src="<?php echo $cover_image_url; ?>" alt="Cover image"
+                        class="mb-3 border border-warning rounded p-1 col-md-4">
+                </div>
+            <?php } ?>
+
+            <div class="form-group">
+                <label for="cover_image_url">Cover Bild</label>
+                <input type="file" name="cover_image_url" id="cover_image_url" accept="image/*" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="<?php echo $title; ?>" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" id="content" required class="form-control"><?php echo $content; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select name="category_id" id="category_id" required class="form-control">
+                    <?php
+                    foreach ($categories as $category) {
+                        echo '<option value="' . $category['id'] . '" ' . ($category['id'] === $category_id ? 'selected' : '') . '>' . $category['name'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-warning" <?php if (!isset($_SESSION['user'])): ?>disabled<?php endif; ?>>
+                <?php echo $keyword ?>
+            </button>
+        </form>
+    </div>
+    </div>
 
     <script>
         // Get the input field for the cover image
@@ -146,7 +158,6 @@ $categories = getCategories();
             coverImage.src = url;
         });
     </script>
-
 
     <?php require_once('./components/footer.php'); ?>
 </body>

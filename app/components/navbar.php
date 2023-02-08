@@ -36,7 +36,7 @@ if (isset($_SESSION['user'])) {
         </li>
         <?php if (isset($_SESSION['user'])): ?>
           <li class="nav-item">
-            <a class="nav-link" href="create.php">Erstellen</a>
+            <a class="nav-link" href="edit.php">Erstellen</a>
           </li>
         <?php endif; ?>
         <li class="nav-item">
